@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+
+<header th:insert="~{fragments/header::header}"></header>
+
+<div class="container">
+    <h1>Edit User</h1>
+
+    <div th:if="${error}" class="error-message">
+        <p th:text="${error}">Error details here.</p>
+    </div>
+
+    <form th:action="@{/users/edit/{id}(id=${user.id})}" th:object="${user}" method="post" class="add-user-form">
+        <div>
+            <label for="firstName">First Name <span style="color:red;">*</span>:</label>
+            <input type="text" id="firstName" th:field="*{firstName}" required/>
+            <div th:if="${#fields.hasErrors('firstName')}" class="error-message">
+                <span th:errors="*{firstName}">First Name Error</span>
+            </div>
+        </div>
+
+        <div>
+            <label for="lastName">Last Name <span style="color:red;">*</span>:</label>
+            <input type="text" id="lastName" th:field="*{lastName}" required/>
+            <div th:if="${#fields.hasErrors('lastName')}" class="error-message">
+                <span th:errors="*{lastName}">Last Name Error</span>
+            </div>
+        </div>
+
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" th:field="*{email}" readonly required/>
+            <small>If you need to update your email, please contact the admin.</small>
+        </div>
+
+        <div>
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" id="phoneNumber" th:field="*{phoneNumber}" readonly required/>
+            <small>If you need to update your phone number, please contact the admin.</small>
+        </div>
+
+        <div>
+            <label for="address">Address <span style="color:red;">*</span>:</label>
+            <input type="text" id="address" th:field="*{address}" required></input>
+            <div th:if="${#fields.hasErrors('address')}" class="error-message">
+                <span th:errors="*{address}">Address Error</span>
+            </div>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-success">Save</button>
+            <a th:href="@{/users/all}">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<footer th:replace="~{fragments/footer::footer}"></footer>
+
+</body>
+</html>

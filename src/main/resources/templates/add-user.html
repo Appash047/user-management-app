@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <title>Add User</title>
+</head>
+<body>
+<header th:insert="~{fragments/header::header}"></header>
+
+<div class="container">
+    <h1>Add User</h1>
+    <div th:if="${error}" style="color:red;">
+        <p th:text="${error}">Error details here.</p>
+    </div>
+    <form th:action="@{/users/add}" method="post" th:object="${user}" class="add-user-form">
+        <div>
+            <label for="firstName">First Name <span style="color:red;">*</span>:</label>
+            <input type="text" id="firstName" th:field="*{firstName}" required/>
+            <div th:if="${#fields.hasErrors('firstName')}" class="error-message">
+                <span th:errors="*{firstName}">First Name Error</span>
+            </div>
+        </div>
+        <div>
+            <label for="lastName">Last Name <span style="color:red;">*</span>:</label>
+            <input type="text" id="lastName" th:field="*{lastName}" required/>
+            <div th:if="${#fields.hasErrors('lastName')}" class="error-message">
+                <span th:errors="*{lastName}">Last Name Error</span>
+            </div>
+        </div>
+        <div>
+            <label for="phoneNumber">Phone Number <span style="color:red;">*</span>:</label>
+            <input type="text" id="phoneNumber" th:field="*{phoneNumber}" required pattern="\d{10}"
+                   title="Please enter a valid 10-digit phone number."/>
+            <div th:if="${#fields.hasErrors('phoneNumber')}" class="error-message">
+                <span th:errors="*{phoneNumber}">Phone Number Error</span>
+            </div>
+        </div>
+        <div>
+            <label for="email">Email <span style="color:red;">*</span>:</label>
+            <input type="email" id="email" name="email" th:field="*{email}" required
+                   pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                   title="Please enter a valid email address (e.g., example@gmail.com)" />
+            <div th:if="${#fields.hasErrors('email')}" class="error-message">
+                <span th:errors="*{email}">Email Error</span>
+            </div>
+        </div>
+        <div>
+            <label for="address">Address <span style="color:red;">*</span>:</label>
+            <input type="text" id="address" th:field="*{address}" required/>
+            <div th:if="${#fields.hasErrors('address')}" class="error-message">
+                <span th:errors="*{address}">Address Error</span>
+            </div>
+        </div>
+        <div>
+            <button type="submit">Add User</button>
+        </div>
+    </form>
+</div>
+
+<footer th:replace="~{fragments/footer::footer}"></footer>
+
+</body>
+</html>

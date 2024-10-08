@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header th:insert="~{fragments/header::header}"></header>
+
+<div class="container">
+    <h1>An Error Occurred</h1>
+    <h2 th:text="${error}" style="color: red;">Error details here.</h2>
+</div>
+
+<footer th:replace="~{fragments/footer::footer}"></footer>
+
+</body>
+</html>

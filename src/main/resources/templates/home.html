@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management Application</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header th:insert="~{fragments/header::header}"></header>
+
+<div class="homeContainer">
+    <div th:if="${message}" style="color:green;">
+        <p th:text="${message}">message details here.</p>
+    </div>
+    <h1>Welcome to the User Management Application</h1>
+    <p>This application allows you to manage user information.</p>
+</div>
+
+<footer th:replace="~{fragments/footer::footer}"></footer>
+</body>
+</html>
